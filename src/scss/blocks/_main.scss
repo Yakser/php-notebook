@@ -1,7 +1,17 @@
+@use "../utils/mixins";
+
 .main {
+  &__wrapper {
+    @include mixins.wrapper-desktop;
+  }
+
   &__title {
     margin: 0 1rem 2rem;
     font-size: 3rem;
     text-align: center;
+  }
+
+  &__pagination {
+    margin-top: 2rem;
   }
 }

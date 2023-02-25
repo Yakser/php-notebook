@@ -12,27 +12,38 @@ include('./components/header.php');
 ?>
 
 <main class="main">
-    <h1 class="main__title">
-        Notebook - Яксанов Сергей 221-322
-    </h1>
-    <?php
+    <div class="main__wrapper">
+        <h1 class="main__title">
+            Notebook - Яксанов Сергей 221-322
+        </h1>
 
-    switch ($_GET['p']) {
-        case 'viewer':
-            include './components/viewer.php';
-            break;
-        case 'add':
-            include './components/add.php';
-            break;
-        case 'edit':
-            include './components/edit.php';
-            break;
-        case 'delete.php':
-            include './components/delete.php.php';
-            break;
-    }
+        <?php
 
-    ?>
+        switch ($_GET['p']) {
+            case 'viewer':
+                include './components/viewer.php';
+                if (!isset($_GET['pg']) || $_GET['pg'] < 0) {
+                    $_GET['pg'] = 0;
+                }
+                if (!isset($_GET['sort']) || ($_GET['sort'] != 'by_id' && $_GET['sort'] != 'by_last_name' &&
+                        $_GET['sort'] != 'birth')) {
+
+                    $_GET['sort'] = 'by_id';
+                }
+                echo getFriendsList($_GET['sort'], $_GET['pg']);
+                break;
+            case 'add':
+                include './components/add.php';
+                break;
+            case 'edit':
+                include './components/edit.php';
+                break;
+            case 'delete.php':
+                include './components/delete.php.php';
+                break;
+        }
+        ?>
+    </div>
 </main>
 
 <?php

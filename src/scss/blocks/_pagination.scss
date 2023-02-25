@@ -1,0 +1,43 @@
+@use "../utils/variables";
+@use "../utils/mixins";
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 1rem;
+
+  &__item {
+    font-size: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: variables.$white;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    transition: variables.$transition;
+    transition-property: background-color;
+
+    &:hover {
+      background-color: rgba(variables.$blue, .2);
+    }
+
+    &--current {
+      font-weight: map-get(variables.$font-weights, "medium");
+      background-color: variables.$beige;
+    }
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: variables.$black;
+  }
+}

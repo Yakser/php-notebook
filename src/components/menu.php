@@ -25,6 +25,11 @@
         $isViewerSelected = toNavigationLinkSelected("viewer");
         $isAddSelected = toNavigationLinkSelected("add");
 
+        $currentPage = 0;
+        if (isset($_GET['pg'])) {
+            $currentPage = $_GET['pg'];
+        }
+
         echo "<li class='navigation__item'>
             <a href='./?p=viewer' class='navigation__link $isViewerSelected'>Просмотр</a>
             <ul class='navigati on__submenu submenu'>
@@ -32,12 +37,12 @@
                     Сортировка:
                 </li>
                 <li class='submenu__item'>
-                <a href='./?p=viewer&sort=by_id' class='submenu__link'>
+                <a href='./?p=viewer&pg=$currentPage&sort=by_id' class='submenu__link'>
                     По умолчанию
                 </a>
                 </li>
                 <li class='submenu__item'>
-                     <a href='./?p=viewer&sort=by_last_name' class='submenu__link'>
+                     <a href='./?p=viewer&pg=$currentPage&sort=by_last_name' class='submenu__link'>
                          По фамилии
                     </a>
                 </li>

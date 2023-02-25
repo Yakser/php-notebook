@@ -1,5 +1,19 @@
+@use "../utils/variables";
+@use "../utils/mixins";
+
 .table {
   max-width: 114rem;
   width: 100%;
   margin: 0 auto;
+
+  &__heading {
+    font-size: 1.4rem;
+    text-align: left;
+  }
+  &__row:nth-child(even) {
+    background-color: variables.$beige;
+  }
+  &__data {
+    font-size: 1.4rem;
+  }
 }
