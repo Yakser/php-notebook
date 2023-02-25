@@ -1,0 +1,27 @@
+@use "../utils/variables";
+@use "../utils/mixins";
+
+.link {
+    color: variables.$blue;
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+    letter-spacing: .1rem;
+
+    transition: variables.$transition all;
+
+    &:hover {
+        opacity: .6;
+    }
+
+    &:active {
+        opacity: 1;
+        color: variables.$pink;
+        transform: scale(.9);
+    }
+
+    &_filled {
+        background-color: variables.$gray;
+        border-radius: variables.$infinite-border-radius;
+        padding: .5rem 1.5rem;
+    }
+}

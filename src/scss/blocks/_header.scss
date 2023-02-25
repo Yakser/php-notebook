@@ -1,0 +1,47 @@
+@use "../utils/variables";
+@use "../utils/mixins";
+
+.header {
+  width: 100%;
+
+  &__wrapper {
+    @include mixins.wrapper-desktop;
+    margin: 3rem auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  &__logo {
+    position: absolute;
+    left: 0;
+    max-width: 20rem;
+    width: 100%;
+    filter: invert(1);
+  }
+
+  @media screen and (max-width: 1200px) {
+    &__logo {
+      position: static;
+      margin-right: 2rem;
+    }
+  }
+  
+  @media screen and (max-width: 1000px) {
+    &__wrapper {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    &__logo {
+      max-width: 15rem;
+      margin-bottom: 2rem;
+      margin-right: 0;
+    }
+    &__title {
+    font-size: 2rem;
+    }
+  }
+}

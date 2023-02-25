@@ -1,0 +1,17 @@
+@use "../utils/variables";
+@use "../utils/mixins";
+
+.footer {
+  width: 100%;
+
+  &__wrapper {
+    @include mixins.wrapper-desktop;
+    margin: 3rem auto;
+
+  }
+
+  &__copyright {
+    font-size: 2rem;
+    font-weight: map-get(variables.$font-weights, 'bold');
+  }
+}

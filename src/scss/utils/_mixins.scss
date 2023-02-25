@@ -1,0 +1,25 @@
+@use "variables";
+
+@mixin reset {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+@mixin wrapper-desktop {
+    max-width: 122.4rem;
+    width: 100%;
+    margin: 0 auto;
+}
+
+@mixin section {
+    padding: 4rem;
+    border-radius: 3.2rem;
+    background-color: variables.$white;
+}
+
+@mixin title {
+    font-size: 4rem;
+    letter-spacing: .4rem;
+}

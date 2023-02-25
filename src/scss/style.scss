@@ -1,0 +1,14 @@
+@use "utils/fonts";
+@use "utils/normalize";
+@use "utils/variables";
+@use "utils/mixins";
+@use "utils/general";
+@use "blocks/visually-hidden";
+
+@use "blocks/header";
+@use "blocks/main";
+@use "blocks/link";
+@use "blocks/navigation";
+@use "blocks/submenu";
+@use "blocks/table";
+@use "blocks/footer";

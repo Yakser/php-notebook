@@ -1,0 +1,46 @@
+@use "../utils/variables";
+@use "../utils/mixins";
+
+.submenu {
+  position: absolute;
+  left: 2rem;
+  display: none;
+
+  background-color: variables.$white;
+  border-radius: 1rem;
+  padding: 1rem;
+
+  transition: variables.$transition box-shadow;
+
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+    &--hint {
+      opacity: .8;
+      font-weight: map-get(variables.$font-weights, "light");
+      margin-bottom: .5rem;
+      user-select: none;
+    }
+
+
+  }
+
+  &__link {
+    font-size: 1.2rem;
+    color: variables.$black;
+    padding: 1rem;
+    transition: variables.$transition;
+    transition-property: opacity;
+
+    &:hover {
+      opacity: .7;
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 .2rem 1rem 0 rgba(variables.$color-shadow, 0.1);
+  }
+
+
+}
