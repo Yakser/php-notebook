@@ -14,7 +14,7 @@ function getDBPasswordFromDotEnv($dotEnvPath): string
     return "wanna hack me?";
 }
 
-function getFriendsList($type, $page): string
+function getFriendsList($sort_type, $page): string
 {
     $host = "localhost";
     $user = "test";
@@ -35,23 +35,21 @@ function getFriendsList($type, $page): string
 
     $RECORDS_PER_PAGE = 10;
     $pages_count = ceil($rows_count / $RECORDS_PER_PAGE);
-
     if ($page > $pages_count) {
         $page = $pages_count - 1;
     }
 
     $start_row = $page * $RECORDS_PER_PAGE;
-    $end_row = ($page + 1) * $RECORDS_PER_PAGE;
 
     $order_type = "id";
-    if ($type == "by_last_name") {
+    if ($sort_type == "by_last_name") {
         $order_type = "last_name";
     }
     $order_by = "ORDER BY $order_type";
 
     // todo: remove select *
     $friends = $con->query("
-            SELECT * FROM notebook.friends $order_by LIMIT $start_row, $end_row
+            SELECT * FROM notebook.friends $order_by LIMIT $start_row, $RECORDS_PER_PAGE
             ");
 
     $allMarkup = "";
@@ -67,6 +65,7 @@ function getFriendsList($type, $page): string
         ";
 
     while ($row = $friends->fetch_assoc()) {
+        $id = $row['id'];
         $first_name = $row['first_name'];
         $last_name = $row['last_name'];
         $email = $row['email'];
@@ -74,7 +73,7 @@ function getFriendsList($type, $page): string
 
         $table .= "
             <tr class='table__row'>
-                <td class='table__data'>$first_name</td>
+                <td class='table__data'>$id $first_name</td>
                 <td class='table__data'>$last_name</td>
                 <td class='table__data'>$email</td>
                 <td class='table__data'>$phone</td>
@@ -87,13 +86,13 @@ function getFriendsList($type, $page): string
     if ($pages_count > 1) {
         $pagination = "<ul class='pagination main__pagination'>";
         for ($page_index = 0; $page_index < $pages_count; $page_index++) {
+            $page_number = $page_index + 1;
             if ($page_index != $page) {
-                $pagination .= '<li class="pagination__item">
-                                    <a class="pagination__link"
-                                     href="?p=viewer&pg=' . $page_index . '">' . ($page_index + 1) . '</a>
-                                </li>';
+                $pagination .= "<li class='pagination__item'>
+                                    <a class='pagination__link' href='?p=viewer&pg=$page_index&sort=$sort_type'>$page_number</a>
+                                </li>";
             } else {
-                $pagination .= '<li class="pagination__item pagination__item--current">' . ($page_index + 1) . '</li>';
+                $pagination .= '<li class="pagination__item pagination__item--current">' . $page_number . '</li>';
             }
         }
         $pagination .= '</ul>';
