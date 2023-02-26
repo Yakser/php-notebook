@@ -1,0 +1,117 @@
+@use "../utils/variables";
+@use "../utils/mixins";
+
+
+.form {
+
+  &__wrapper {
+    @include mixins.wrapper-desktop;
+
+    padding: 2rem;
+    background-color: variables.$white;
+    border: 1px solid variables.$gray;
+    border-radius: 3.2rem;
+  }
+
+
+  &__fieldset {
+    border: 0;
+  }
+
+  &__legend {
+    margin-bottom: 1rem;
+
+    font-size: 2.4rem;
+    font-weight: map-get(variables.$font-weights, "medium");
+
+  }
+
+  &__input {
+    padding: 1rem 2rem;
+
+    font-size: 2rem;
+
+    border: 2px solid variables.$beige;
+    border-radius: variables.$infinite-border-radius;
+
+    &[type="checkbox"] {
+      width: 2rem;
+      height: 2rem;
+      margin-right: 1rem;
+    }
+
+    &::placeholder {
+      color: rgba(variables.$black, .4);
+    }
+
+    &:focus,
+    &:focus-visible {
+      outline: 0;
+      border-color: variables.$blue;
+    }
+  }
+
+  &__textarea {
+    border-radius: 3rem;
+    resize: none;
+  }
+
+  &__label {
+    display: block;
+    font-size: 2rem;
+
+    transition: variables.$transition;
+    transition-property: color;
+    margin-bottom: 1rem;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    &:has(.form__input:checked) {
+      color: variables.$green;
+    }
+
+    &_with-checkbox {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0;
+    }
+  }
+
+  &__submit {
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+
+    font-size: 2rem;
+    line-height: 2.4rem;
+    font-weight: map-get(variables.$font-weights, "medium");
+    color: variables.$white;
+
+    background-color: variables.$blue;
+
+    border-radius: variables.$infinite-border-radius;
+    border: 3px solid transparent;
+
+    cursor: pointer;
+
+    transition: variables.$transition;
+    transition-property: border-color, transform;
+
+    &:focus,
+    &:focus-visible {
+      outline: 0;
+      border-color: variables.$pink;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(.95);
+      background-color: darken(variables.$blue, 10%);
+    }
+  }
+
+}

@@ -1,28 +1,12 @@
 <?php
-function getDBPasswordFromDotEnv($dotEnvPath): string
-{
-    // fixme
-    $fh = fopen($dotEnvPath, 'r');
-    while ($line = fgets($fh)) {
-        list($name, $value) = explode("=", $line);
-        if ($name === "DB_PASSWORD") {
-            return trim($value);
-        }
-    }
-    fclose($fh);
 
-    return "wanna hack me?";
-}
 
 function getFriendsList($sort_type, $page): string
 {
-    $host = "localhost";
-    $user = "test";
-    $password = getDBPasswordFromDotEnv("../.env");
-    $database = "mysql";
-    $port = 3306;
 
-    $con = new mysqli($host, $user, $password, $database, $port);
+    require("db.php");
+    $con = connect();
+
     if (mysqli_connect_errno()) {
         return 'Ошибка подключения к БД: ' . mysqli_connect_error();
     }
@@ -57,6 +41,7 @@ function getFriendsList($sort_type, $page): string
     $table = "<table class='table'>";
     $table .= "
             <tr class='table__row'>
+                <th class='table__heading'>ID</th>
                 <th class='table__heading'>Имя</th>
                 <th class='table__heading'>Фамилия</th>
                 <th class='table__heading'>Почта</th>
@@ -73,7 +58,8 @@ function getFriendsList($sort_type, $page): string
 
         $table .= "
             <tr class='table__row'>
-                <td class='table__data'>$id $first_name</td>
+                <td class='table__data'>$id</td>
+                <td class='table__data'>$first_name</td>
                 <td class='table__data'>$last_name</td>
                 <td class='table__data'>$email</td>
                 <td class='table__data'>$phone</td>

@@ -49,7 +49,7 @@
             </ul>
           </li>";
         echo "<li class='navigation__item'>
-            <a href='./?p=add' class='navigation__link $isAddSelected'>Добавление записи</a>
+            <a href='./?p=add' class='navigation__link $isAddSelected'>Добавить запись</a>
           </li>";
 
         ?>
