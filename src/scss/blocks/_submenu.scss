@@ -16,6 +16,7 @@
     &:not(:last-child) {
       margin-bottom: 1rem;
     }
+
     &--hint {
       opacity: .8;
       font-weight: map-get(variables.$font-weights, "light");
@@ -32,6 +33,10 @@
     padding: 1rem;
     transition: variables.$transition;
     transition-property: opacity;
+
+    &--selected {
+      color: red;
+    }
 
     &:hover {
       opacity: .7;

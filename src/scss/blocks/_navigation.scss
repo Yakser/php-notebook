@@ -9,13 +9,25 @@
     display: flex;
     align-items: center;
   }
+
   &__item {
     &:not(:last-child) {
       margin-right: 4rem;
     }
-    &:hover .submenu {
-      display: flex;
-      flex-direction: column;
+
+    @media (hover: hover) {
+      &:hover .submenu {
+        display: flex;
+        flex-direction: column;
+        //background-color: rgba(variables.$white, .5);
+        //backdrop-filter: blur(.5rem) saturate(180%);
+      }
+    }
+    @media not (hover: hover) {
+      .submenu {
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
 

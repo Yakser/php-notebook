@@ -1,0 +1,33 @@
+@use "../utils/variables";
+@use "../utils/mixins";
+
+.edit-links {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item {
+    font-size: 1.6rem;
+    width: max-content;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition-property: background-color;
+    margin: 1rem;
+    &:hover {
+      background-color: rgba(variables.$blue, .2);
+    }
+    &--current {
+      font-weight: map-get(variables.$font-weights, "medium");
+      background-color: variables.$beige;
+    }
+  }
+
+  &__link {
+    color: variables.$black;
+  }
+}

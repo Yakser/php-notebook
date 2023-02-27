@@ -24,6 +24,11 @@
 
         $isViewerSelected = toNavigationLinkSelected("viewer");
         $isAddSelected = toNavigationLinkSelected("add");
+        $isEditSelected = toNavigationLinkSelected("edit");
+        $isDeleteSelected = toNavigationLinkSelected("delete");
+
+        $isSortByIdSelected = toNavigationLinkSelected("by_id");
+        $isSortByLastNameSelected = toNavigationLinkSelected("by_last_name");
 
         $currentPage = 0;
         if (isset($_GET['pg'])) {
@@ -37,21 +42,28 @@
                     Сортировка:
                 </li>
                 <li class='submenu__item'>
-                <a href='./?p=viewer&pg=$currentPage&sort=by_id' class='submenu__link'>
+                <a href='./?p=viewer&pg=$currentPage&sort=by_id' class='submenu__link $isSortByIdSelected'>
                     По умолчанию
                 </a>
                 </li>
                 <li class='submenu__item'>
-                     <a href='./?p=viewer&pg=$currentPage&sort=by_last_name' class='submenu__link'>
+                     <a href='./?p=viewer&pg=$currentPage&sort=by_last_name' class='submenu__link $isSortByLastNameSelected'>
                          По фамилии
                     </a>
                 </li>
             </ul>
           </li>";
         echo "<li class='navigation__item'>
-            <a href='./?p=add' class='navigation__link $isAddSelected'>Добавить запись</a>
+            <a href='./?p=add' class='navigation__link $isAddSelected'>Добавить</a>
           </li>";
 
+        echo "<li class='navigation__item'>
+            <a href='./?p=edit' class='navigation__link $isEditSelected'>Изменить</a>
+          </li>";
+
+        echo "<li class='navigation__item'>
+            <a href='./?p=delete' class='navigation__link $isDeleteSelected'>Удалить</a>
+          </li>";
         ?>
     </ul>
 </nav>

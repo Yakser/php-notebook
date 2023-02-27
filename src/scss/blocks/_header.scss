@@ -12,6 +12,9 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    @media not (hover: hover) {
+      margin-bottom: 7rem;
+    }
   }
 
   &__logo {
@@ -28,7 +31,7 @@
       margin-right: 2rem;
     }
   }
-  
+
   @media screen and (max-width: 1000px) {
     &__wrapper {
       flex-direction: column;
