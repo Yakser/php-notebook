@@ -764,6 +764,14 @@ ul {
   transform: scale(0.95);
   background-color: #65b9ff;
 }
+.form__status {
+  margin-bottom: 2rem;
+}
+.form__text {
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 500;
+}
 
 .footer {
   width: 100%;

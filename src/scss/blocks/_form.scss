@@ -114,4 +114,13 @@
     }
   }
 
+  &__status {
+    margin-bottom: 2rem;
+  }
+
+  &__text {
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: map-get(variables.$font-weights, "medium");
+  }
 }
