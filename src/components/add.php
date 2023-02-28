@@ -10,6 +10,12 @@
                 include("db.php");
 
                 $con = connect();
+                if ($con->connect_errno) {
+                    echo "<div class='form__status'>";
+                    echo "<p class='form__text'>Ошибка подключения к БД 😢</p>";
+                    echo "</div>";
+                    exit();
+                }
                 $result = $con->query('INSERT INTO notebook.friends (first_name,comment) VALUES ("' . $first_name . '", "' . $comment . '")');
 
                 echo "<div class='form__status'>";
@@ -42,7 +48,6 @@
             </label>
         </fieldset>
         <button class="form__submit" name="button-add" type="submit">Добавить</button>
-
     </div>
 </form>
 

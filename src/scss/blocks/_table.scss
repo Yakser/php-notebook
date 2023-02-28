@@ -10,10 +10,13 @@
     font-size: 1.4rem;
     text-align: left;
   }
+
   &__row:nth-child(even) {
     background-color: variables.$beige;
   }
+
   &__data {
     font-size: 1.4rem;
+    padding: 1rem;
   }
 }
