@@ -1,28 +1,22 @@
 <?php
 
-function getDBPasswordFromDotEnv($dotEnvPath): string
+function loadDotEnv($dotEnvPath): array
 {
-    // fixme
+    $store = [];
     $fh = fopen($dotEnvPath, 'r');
     while ($line = fgets($fh)) {
         list($name, $value) = explode("=", $line);
-        if ($name === "DB_PASSWORD") {
-            return trim($value);
-        }
+            $store[$name] = trim($value);
     }
     fclose($fh);
-
-    return "wanna hack me?";
+    return $store;
 }
+
+
 
 function connect(): mysqli
 {
-    $host = "localhost";
-    $user = "test";
-    $password = getDBPasswordFromDotEnv("../.env");
-    $database = "mysql";
-    $port = 3306;
-
-    return new mysqli($host, $user, $password, $database, $port);
+    $store = loadDotEnv("../.env");
+    return new mysqli($store['DB_HOST'], $store['DB_USER'], $store['DB_PASSWORD'], $store['DB_NAME'], $store['DB_PORT']);
 }
 
