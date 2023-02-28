@@ -38,7 +38,7 @@ include('./components/header.php');
             case 'edit':
                 include './components/edit.php';
                 break;
-            case 'delete.php':
+            case 'delete':
                 include './components/delete.php';
                 break;
         }

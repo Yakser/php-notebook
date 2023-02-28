@@ -5,12 +5,19 @@
         include("db.php");
         $con = connect();
 
+
         if ($_POST) {
             $id = htmlspecialchars(trim($_POST['id']));
             $first_name = htmlspecialchars(trim($_POST['first_name']));
+            $last_name = htmlspecialchars(trim($_POST['last_name']));
+            $patronymic = htmlspecialchars(trim($_POST['patronymic']));
+
             // first_name is required
             if ($first_name) {
-                $result = $con->query('UPDATE notebook.friends SET first_name="' . $first_name . '" WHERE id="' . $id . '"');
+                $result = $con->query('UPDATE notebook.friends SET first_name="' . $first_name . '", 
+                 last_name="' . $last_name . '", 
+                 patronymic="' . $patronymic . '"
+                 WHERE id="' . $id . '"');
 
                 echo "<div class='form__status'>";
                 if ($result) {
@@ -28,12 +35,12 @@
         $currentRow = array();
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            $result = $con->query('select id, first_name from notebook.friends where id="' . $id . '" limit 0, 1');
+            $result = $con->query('select id, first_name, last_name, patronymic from notebook.friends where id="' . $id . '" limit 0, 1');
             $currentRow = $result->fetch_assoc();
         }
 
         if (!$currentRow) {
-            $result = $con->query('select id, first_name from notebook.friends limit 0, 1');
+            $result = $con->query('select id, first_name, last_name, patronymic from notebook.friends limit 0, 1');
             $currentRow = $result->fetch_assoc();
         }
         ?>
@@ -47,6 +54,26 @@
                   name="first_name"
                    placeholder="Имя"
                     required value="' . $currentRow['first_name'] . '"/>';
+                ?>
+            </label>
+            <label class="form__label">
+                <span class="visually-hidden">Фамилия</span>
+                <?php
+                echo '<input class="form__input"
+                 type="text"
+                  name="last_name"
+                   placeholder="Фамилия"
+                    required value="' . $currentRow['last_name'] . '"/>';
+                ?>
+            </label>
+            <label class="form__label">
+                <span class="visually-hidden">Отчество</span>
+                <?php
+                echo '<input class="form__input"
+                 type="text"
+                  name="patronymic"
+                   placeholder="Отчество"
+                    required value="' . $currentRow['patronymic'] . '"/>';
                 ?>
             </label>
             <label class="form__label">
@@ -76,22 +103,22 @@
 </form>
 
 <?php
-
-
 // fixme - add pagination
-$result = $con->query('select id, first_name from notebook.friends');
+$result = $con->query('select id, first_name, last_name, patronymic from notebook.friends');
 
 if ($result) {
     echo "<ul class='edit-links'>";
     while ($row = $result->fetch_assoc()) {
-        // todo инициалы
+        $name = $row['last_name'] . " " .
+            (mb_substr($row['first_name'], 0, 1)) . ". " .
+            (mb_substr($row['patronymic'], 0, 1)) . ".";
+
         if ($currentRow['id'] == $row['id']) {
-            echo "<li class='edit-links__item edit-links__item--current'>" . $row["first_name"] . "</li>";
+            echo "<li class='edit-links__item edit-links__item--current'>" . $name . "</li>";
         } else {
             echo "<li class='edit-links__item'>
-                    <a class='edit-links__link' href='?p=edit&id=" . $row['id'] . "'>" . $row['first_name'] . "</a>
+                    <a class='edit-links__link' href='?p=edit&id=" . $row['id'] . "'>" . $name . "</a>
                   </li>";
-
         }
     }
     echo "</ul>";
