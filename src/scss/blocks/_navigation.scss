@@ -23,7 +23,7 @@
         //backdrop-filter: blur(.5rem) saturate(180%);
       }
     }
-    @media not (hover: hover) {
+    @media not (hover: hover), screen and (max-width: 1024px) {
       .submenu {
         display: flex;
         flex-direction: column;
