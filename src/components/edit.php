@@ -3,7 +3,7 @@
         <?php
         // todo check connection error
         include("db.php");
-        $con = connect();
+        list($con, $schema) = connect();
 
 
         if ($_POST) {
@@ -14,7 +14,7 @@
 
             // first_name is required
             if ($first_name) {
-                $result = $con->query('UPDATE notebook.friends SET first_name="' . $first_name . '", 
+                $result = $con->query('UPDATE '.$schema.'.friends SET first_name="' . $first_name . '", 
                  last_name="' . $last_name . '", 
                  patronymic="' . $patronymic . '"
                  WHERE id="' . $id . '"');

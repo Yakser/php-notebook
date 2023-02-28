@@ -9,14 +9,14 @@
             if ($first_name) {
                 include("db.php");
 
-                $con = connect();
+                list($con, $schema) = connect();
                 if ($con->connect_errno) {
                     echo "<div class='form__status'>";
                     echo "<p class='form__text'>Ошибка подключения к БД 😢</p>";
                     echo "</div>";
                     exit();
                 }
-                $result = $con->query('INSERT INTO notebook.friends (first_name,comment) VALUES ("' . $first_name . '", "' . $comment . '")');
+                $result = $con->query('INSERT INTO '.$schema.'.friends (first_name,comment) VALUES ("' . $first_name . '", "' . $comment . '")');
 
                 echo "<div class='form__status'>";
                 if ($result) {

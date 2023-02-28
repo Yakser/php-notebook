@@ -14,9 +14,9 @@ function loadDotEnv($dotEnvPath): array
 
 
 
-function connect(): mysqli
+function connect(): array
 {
     $store = loadDotEnv("../.env");
-    return new mysqli($store['DB_HOST'], $store['DB_USER'], $store['DB_PASSWORD'], $store['DB_NAME'], $store['DB_PORT']);
+    return [new mysqli($store['DB_HOST'], $store['DB_USER'], $store['DB_PASSWORD'], $store['DB_NAME'], $store['DB_PORT']), $store['DB_SCHEMA']];
 }
 

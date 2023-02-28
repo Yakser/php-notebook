@@ -5,13 +5,13 @@ function getFriendsList($sort_type, $page): string
 {
 
     require("db.php");
-    $con = connect();
+    list($con, $schema) = connect();
 
     if (mysqli_connect_errno()) {
         return 'Ошибка подключения к БД: ' . mysqli_connect_error();
     }
 
-    $result = $con->query('SELECT COUNT(*) FROM notebook.friends')->fetch_row();
+    $result = $con->query('SELECT COUNT(*) FROM '.$schema.'.friends')->fetch_row();
     $rows_count = $result[0];
     if ($rows_count === 0) {
         return 'В таблице нет данных';
@@ -33,7 +33,7 @@ function getFriendsList($sort_type, $page): string
 
     // todo: remove select *
     $friends = $con->query("
-            SELECT * FROM notebook.friends $order_by LIMIT $start_row, $RECORDS_PER_PAGE
+            SELECT * FROM $schema.friends $order_by LIMIT $start_row, $RECORDS_PER_PAGE
             ");
 
     $allMarkup = "";

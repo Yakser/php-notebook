@@ -3,11 +3,11 @@
         <?php
         // todo check connection error
         include("db.php");
-        $con = connect();
+        list($con, $schema) = connect();
 
         if ($_POST) {
             $id = htmlspecialchars(trim($_POST['id']));
-            $result = $con->query('DELETE FROM notebook.friends WHERE id="' . $id . '"');
+            $result = $con->query('DELETE FROM '.$schema.'.friends WHERE id="' . $id . '"');
 
             echo "<div class='form__status'>";
             if ($result) {
@@ -23,12 +23,12 @@
         $currentRow = array();
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            $result = $con->query('select id, first_name, last_name, patronymic from notebook.friends where id="' . $id . '" limit 0, 1');
+            $result = $con->query('select id, first_name, last_name, patronymic from '.$schema.'.friends where id="' . $id . '" limit 0, 1');
             $currentRow = $result->fetch_assoc();
         }
 
         if (!$currentRow) {
-            $result = $con->query('select id, first_name, last_name, patronymic from notebook.friends limit 0, 1');
+            $result = $con->query('select id, first_name, last_name, patronymic from '.$schema.'.friends limit 0, 1');
             $currentRow = $result->fetch_assoc();
         }
         ?>
@@ -84,7 +84,7 @@
 
 <?php
 // fixme - add pagination
-$result = $con->query('select id, first_name, last_name, patronymic from notebook.friends');
+$result = $con->query('select id, first_name, last_name, patronymic from '.$schema.'.friends');
 
 if ($result) {
     echo "<ul class='edit-links'>";
